@@ -1,13 +1,13 @@
 FROM debian:bookworm-slim
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates curl \
-    && curl -fsSL http://apt.h3/h3.gpg -o /etc/apt/keyrings/h3.gpg \
+    && apt-get install -y --no-install-recommends ca-certificates curl gpg \
+    && curl -fsSL http://apt.h3/h3.gpg | gpg --dearmor -o /etc/apt/keyrings/h3.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/h3.gpg] http://apt.h3 trixie main" \
        > /etc/apt/sources.list.d/h3.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends ldk-controller \
-    && apt-get purge -y curl \
+    && apt-get purge -y curl gpg \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
