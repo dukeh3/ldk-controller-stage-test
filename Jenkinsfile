@@ -11,9 +11,9 @@ pipeline {
             steps {
                 sh '''
                     set -eux
-                    ssh root@lp-dev "mkdir -p /opt/ldk-controller-stage-test"
-                    scp Dockerfile docker-compose.yml root@lp-dev:/opt/ldk-controller-stage-test/
-                    ssh root@lp-dev "cd /opt/ldk-controller-stage-test && docker compose build --no-cache && docker compose up -d"
+                    ssh root@172.16.10.100 "mkdir -p /opt/ldk-controller-stage-test"
+                    scp Dockerfile docker-compose.yml root@172.16.10.100:/opt/ldk-controller-stage-test/
+                    ssh root@172.16.10.100 "cd /opt/ldk-controller-stage-test && docker compose build --no-cache && docker compose up -d"
                 '''
             }
         }
@@ -21,7 +21,7 @@ pipeline {
 
     post {
         success {
-            sh 'ssh root@lp-dev "docker ps --filter name=ldk-alice --filter name=ldk-bob"'
+            sh 'ssh root@172.16.10.100 "docker ps --filter name=ldk-alice --filter name=ldk-bob"'
         }
     }
 }
