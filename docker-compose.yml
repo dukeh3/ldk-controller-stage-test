@@ -1,0 +1,38 @@
+services:
+  ldk-alice:
+    build: .
+    image: ldk-controller:stage
+    container_name: ldk-alice
+    restart: unless-stopped
+    volumes:
+      - /opt/ldk-alice/config.toml:/etc/ldk-controller/config.toml:ro
+      - /opt/ldk-alice/data:/var/lib/ldk-controller/data
+    networks:
+      lan:
+        ipv4_address: 172.16.10.110
+    healthcheck:
+      test: ["CMD-SHELL", "test -d /var/lib/ldk-controller/data || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ldk-bob:
+    build: .
+    image: ldk-controller:stage
+    container_name: ldk-bob
+    restart: unless-stopped
+    volumes:
+      - /opt/ldk-bob/config.toml:/etc/ldk-controller/config.toml:ro
+      - /opt/ldk-bob/data:/var/lib/ldk-controller/data
+    networks:
+      lan:
+        ipv4_address: 172.16.10.111
+    healthcheck:
+      test: ["CMD-SHELL", "test -d /var/lib/ldk-controller/data || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  lan:
+    external: true
