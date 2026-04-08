@@ -13,8 +13,8 @@ pipeline {
                     set -eux
                     ssh root@172.16.10.100 "mkdir -p /opt/ldk-controller-stage-test"
                     scp Dockerfile docker-compose.yml root@172.16.10.100:/opt/ldk-controller-stage-test/
-                    ssh root@172.16.10.100 "docker rm -f ldk-alice ldk-bob 2>/dev/null || true"
-                    ssh root@172.16.10.100 "cd /opt/ldk-controller-stage-test && docker compose build --no-cache && docker compose up -d"
+                    ssh root@172.16.10.100 "chown -R 100:101 /opt/ldk-alice /opt/ldk-bob"
+                    ssh root@172.16.10.100 "cd /opt/ldk-controller-stage-test && docker compose down && docker compose build --no-cache && docker compose up -d"
                 '''
             }
         }
