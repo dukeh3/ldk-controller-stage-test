@@ -4,6 +4,8 @@ services:
     image: ldk-controller:stage
     container_name: ldk-alice
     restart: unless-stopped
+    environment:
+      - RUST_LOG=info,nostr_sdk=debug,ldk_controller=debug
     volumes:
       - /opt/ldk-alice/config.toml:/etc/ldk-controller/config.toml:ro
       - /opt/ldk-alice/data:/var/lib/ldk-controller/data
@@ -21,6 +23,8 @@ services:
     image: ldk-controller:stage
     container_name: ldk-bob
     restart: unless-stopped
+    environment:
+      - RUST_LOG=info,nostr_sdk=debug,ldk_controller=debug
     volumes:
       - /opt/ldk-bob/config.toml:/etc/ldk-controller/config.toml:ro
       - /opt/ldk-bob/data:/var/lib/ldk-controller/data
