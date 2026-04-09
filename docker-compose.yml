@@ -9,6 +9,7 @@ services:
     volumes:
       - /opt/ldk-alice/config.toml:/etc/ldk-controller/config.toml:ro
       - /opt/ldk-alice/data:/var/lib/ldk-controller/data
+    mac_address: "02:42:ac:10:0a:6e"
     networks:
       lan:
         ipv4_address: 172.16.10.110
@@ -28,6 +29,7 @@ services:
     volumes:
       - /opt/ldk-bob/config.toml:/etc/ldk-controller/config.toml:ro
       - /opt/ldk-bob/data:/var/lib/ldk-controller/data
+    mac_address: "02:42:ac:10:0a:6f"
     networks:
       lan:
         ipv4_address: 172.16.10.111
