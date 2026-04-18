@@ -18,6 +18,22 @@ pipeline {
                 '''
             }
         }
+
+        stage('Smoke Test') {
+            steps {
+                sh '''
+                    set -eux
+                    cd nwc-check && cargo build --release
+                '''
+                // Wait for containers to be fully ready
+                sleep(time: 10, unit: 'SECONDS')
+                sh '''
+                    set -eux
+                    scp nwc-check/target/release/nwc-check root@172.16.10.100:/tmp/
+                    ssh root@172.16.10.100 "/tmp/nwc-check ws://172.16.10.101:7777 alice=f1a7ecc5f92ef37ef412cfe6c2218e13ae374a27350b612ea718b2ef55506251 bob=832fd6ab8c12dae36a67d951dfe7c22b4edd96b127aaa924844339ddac1e3eff"
+                '''
+            }
+        }
     }
 
     post {
