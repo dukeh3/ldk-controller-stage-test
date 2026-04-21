@@ -27,6 +27,13 @@ RUN apt-get update \
        ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+# Allow jenkins user to access Docker socket (GID 107 on user-service-host)
+RUN groupadd -g 107 docker && usermod -aG docker jenkins
+
+# Install docker-compose v2 standalone
+RUN curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64" \
+    -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+
 USER jenkins
 ENV CARGO_HOME=/home/jenkins/.cargo
 ENV RUSTUP_HOME=/home/jenkins/.rustup
