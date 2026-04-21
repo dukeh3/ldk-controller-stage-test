@@ -20,6 +20,8 @@ RUN apt-get update \
        dpkg-dev \
        fakeroot \
        lintian \
+       reprepro \
+       openssh-client \
        git \
        curl \
        ca-certificates \

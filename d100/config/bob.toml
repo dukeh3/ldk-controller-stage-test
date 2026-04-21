@@ -1,0 +1,19 @@
+[node]
+network = "regtest"
+listening_port = 9735
+data_dir = "/var/lib/ldk-controller/data"
+
+[nostr]
+relay = "ws://10.1.100.52:7777"
+private_key = "2539e6ae61cf907342d36bfb0b0b2afaaa0718d3a945ddd56e65b845aceb1cbf"
+
+[wallet]
+max_channel_size_sats = 1000000
+min_channel_size_sats = 20000
+auto_accept_channels = true
+
+[bitcoind]
+rpc_host = "10.1.100.51"
+rpc_port = 18443
+rpc_user = "rpcuser"
+rpc_password = "rpcpass"

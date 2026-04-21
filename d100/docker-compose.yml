@@ -1,0 +1,84 @@
+services:
+  bitcoind:
+    image: ruimarinho/bitcoin-core:latest
+    container_name: bitcoind-regtest
+    restart: unless-stopped
+    command:
+      - -regtest=1
+      - -server=1
+      - -txindex=1
+      - -printtoconsole
+      - -fallbackfee=0.0002
+      - -rpcbind=0.0.0.0
+      - -rpcallowip=0.0.0.0/0
+      - -rpcuser=rpcuser
+      - -rpcpassword=rpcpass
+      - -rpcport=18443
+    volumes:
+      - bitcoind-data:/home/bitcoin/.bitcoin
+    networks:
+      d100:
+        ipv4_address: 10.1.100.51
+
+  strfry:
+    build:
+      context: .
+      dockerfile: Dockerfile.strfry
+    image: strfry:local
+    container_name: strfry-relay
+    restart: unless-stopped
+    volumes:
+      - ./strfry.conf:/var/lib/strfry/strfry.conf:ro
+      - strfry-data:/var/lib/strfry/strfry-db
+    command: ["relay", "--config=/var/lib/strfry/strfry.conf"]
+    networks:
+      d100:
+        ipv4_address: 10.1.100.52
+
+  ldk-alice:
+    build:
+      context: .
+      dockerfile: Dockerfile.ldk
+    image: ldk-controller:d100
+    container_name: ldk-alice
+    restart: unless-stopped
+    depends_on:
+      - bitcoind
+      - strfry
+    environment:
+      - RUST_LOG=info,ldk_controller=debug
+    volumes:
+      - ./config/alice.toml:/etc/ldk-controller/config.toml:ro
+      - alice-data:/var/lib/ldk-controller/data
+    networks:
+      d100:
+        ipv4_address: 10.1.100.53
+
+  ldk-bob:
+    build:
+      context: .
+      dockerfile: Dockerfile.ldk
+    image: ldk-controller:d100
+    container_name: ldk-bob
+    restart: unless-stopped
+    depends_on:
+      - bitcoind
+      - strfry
+    environment:
+      - RUST_LOG=info,ldk_controller=debug
+    volumes:
+      - ./config/bob.toml:/etc/ldk-controller/config.toml:ro
+      - bob-data:/var/lib/ldk-controller/data
+    networks:
+      d100:
+        ipv4_address: 10.1.100.54
+
+volumes:
+  bitcoind-data:
+  strfry-data:
+  alice-data:
+  bob-data:
+
+networks:
+  d100:
+    external: true

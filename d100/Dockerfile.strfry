@@ -1,0 +1,29 @@
+FROM debian:bookworm AS builder
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git ca-certificates g++ make pkg-config libyaml-cpp-dev libssl-dev zlib1g-dev \
+    liblmdb-dev libflatbuffers-dev libsecp256k1-dev libzstd-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone --depth 1 https://github.com/hoytech/strfry.git /build/strfry
+WORKDIR /build/strfry
+RUN git submodule update --init
+RUN make setup-golpe && make -j$(nproc)
+
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libyaml-cpp0.7 libssl3 zlib1g liblmdb0 libflatbuffers2 \
+    libsecp256k1-1 libzstd1 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /build/strfry/strfry /usr/local/bin/strfry
+
+RUN mkdir -p /var/lib/strfry \
+    && useradd -r -s /bin/false strfry \
+    && chown strfry:strfry /var/lib/strfry
+
+USER strfry
+WORKDIR /var/lib/strfry
+EXPOSE 7777
+ENTRYPOINT ["strfry", "relay"]
