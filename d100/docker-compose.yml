@@ -18,7 +18,7 @@ services:
       - bitcoind-data:/home/bitcoin/.bitcoin
     networks:
       d100:
-        ipv4_address: 10.1.100.51
+        ipv4_address: 10.1.100.73
 
   strfry:
     build:
@@ -33,7 +33,7 @@ services:
     command: ["relay", "--config=/var/lib/strfry/strfry.conf"]
     networks:
       d100:
-        ipv4_address: 10.1.100.52
+        ipv4_address: 10.1.100.70
 
   ldk-alice:
     build:
@@ -52,7 +52,7 @@ services:
       - alice-data:/var/lib/ldk-controller/data
     networks:
       d100:
-        ipv4_address: 10.1.100.53
+        ipv4_address: 10.1.100.71
 
   ldk-bob:
     build:
@@ -71,7 +71,7 @@ services:
       - bob-data:/var/lib/ldk-controller/data
     networks:
       d100:
-        ipv4_address: 10.1.100.54
+        ipv4_address: 10.1.100.72
 
 volumes:
   bitcoind-data:

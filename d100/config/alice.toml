@@ -4,7 +4,7 @@ listening_port = 9735
 data_dir = "/var/lib/ldk-controller/data"
 
 [nostr]
-relay = "ws://10.1.100.52:7777"
+relay = "ws://10.1.100.70:7777"
 private_key = "971e2bb0fbfc0380610d806158082905f9ef6d3683f6055380fcfb92b29b2d2d"
 
 [wallet]
@@ -13,7 +13,7 @@ min_channel_size_sats = 20000
 auto_accept_channels = true
 
 [bitcoind]
-rpc_host = "10.1.100.51"
+rpc_host = "10.1.100.73"
 rpc_port = 18443
 rpc_user = "rpcuser"
 rpc_password = "rpcpass"
