@@ -2,8 +2,8 @@ FROM debian:bookworm-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl gpg \
-    && curl -fsSL http://10.1.100.49:8080/d100-test.gpg | gpg --dearmor -o /etc/apt/keyrings/d100-test.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/d100-test.gpg] http://10.1.100.49:8080 trixie main" \
+    && curl -fsSL http://172.17.0.1:8080/d100-test.gpg | gpg --dearmor -o /etc/apt/keyrings/d100-test.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/d100-test.gpg] http://172.17.0.1:8080 trixie main" \
        > /etc/apt/sources.list.d/d100-test.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends ldk-controller \
