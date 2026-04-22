@@ -1,0 +1,25 @@
+$ORIGIN uz.d100.net.h3.
+$TTL 300
+
+@       IN  SOA   dns.uz.d100.net.h3. hostmaster.uz.d100.net.h3. (
+            2026042201  ; serial
+            300         ; refresh
+            120         ; retry
+            604800      ; expire
+            300         ; minimum
+        )
+
+        IN  NS    dns.uz.d100.net.h3.
+
+; user services (.50-.59)
+dns     IN  A     10.1.100.50
+apt     IN  A     10.1.100.51
+
+; jenkins agents (.60-.69)
+docker-rust-agent-1  IN  A  10.1.100.60
+
+; test containers (.70+)
+strfry      IN  A     10.1.100.70
+ldk-alice   IN  A     10.1.100.71
+ldk-bob     IN  A     10.1.100.72
+bitcoind    IN  A     10.1.100.73

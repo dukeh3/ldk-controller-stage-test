@@ -1,0 +1,9 @@
+uz.d100.net.h3 {
+    file /etc/coredns/uz.d100.net.h3.zone
+    log
+}
+
+. {
+    forward . 10.1.100.2
+    log
+}
