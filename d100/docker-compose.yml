@@ -18,7 +18,7 @@ services:
       - bitcoind-data:/home/bitcoin/.bitcoin
     networks:
       d100:
-        ipv4_address: 10.1.100.73
+        ipv4_address: 10.1.100.71
 
   strfry:
     build:
@@ -52,7 +52,7 @@ services:
       - alice-data:/var/lib/ldk-controller/data
     networks:
       d100:
-        ipv4_address: 10.1.100.71
+        ipv4_address: 10.1.100.80
 
   ldk-bob:
     build:
@@ -71,7 +71,7 @@ services:
       - bob-data:/var/lib/ldk-controller/data
     networks:
       d100:
-        ipv4_address: 10.1.100.72
+        ipv4_address: 10.1.100.81
 
 volumes:
   bitcoind-data:

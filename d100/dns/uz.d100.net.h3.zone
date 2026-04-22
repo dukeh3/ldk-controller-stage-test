@@ -2,7 +2,7 @@ $ORIGIN uz.d100.net.h3.
 $TTL 300
 
 @       IN  SOA   ns.uz.d100.net.h3. hostmaster.uz.d100.net.h3. (
-            2026042202  ; serial
+            2026042203  ; serial
             300         ; refresh
             120         ; retry
             604800      ; expire
@@ -18,8 +18,10 @@ apt     IN  A     10.1.100.51
 ; jenkins agents (.60-.69)
 docker-rust-agent-1  IN  A  10.1.100.60
 
-; test containers (.70+)
+; test infrastructure (.70-.79)
 strfry      IN  A     10.1.100.70
-ldk-alice   IN  A     10.1.100.71
-ldk-bob     IN  A     10.1.100.72
-bitcoind    IN  A     10.1.100.73
+bitcoind    IN  A     10.1.100.71
+
+; test nodes (.80+)
+ldk-alice   IN  A     10.1.100.80
+ldk-bob     IN  A     10.1.100.81

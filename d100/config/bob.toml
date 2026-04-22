@@ -13,7 +13,7 @@ min_channel_size_sats = 20000
 auto_accept_channels = true
 
 [bitcoind]
-rpc_host = "10.1.100.73"
+rpc_host = "10.1.100.71"
 rpc_port = 18443
 rpc_user = "rpcuser"
 rpc_password = "rpcpass"
