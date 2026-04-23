@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-nostr-sdk = { git = "https://github.com/dukeh3/nostr.git", rev = "5108c88b" }
-nwc = { git = "https://github.com/dukeh3/nostr.git", rev = "5108c88b" }
+nostr-sdk = { git = "https://github.com/dukeh3/nostr.git", rev = "247df9c1" }
+nwc = { git = "https://github.com/dukeh3/nostr.git", rev = "247df9c1" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 serde_json = "1"
