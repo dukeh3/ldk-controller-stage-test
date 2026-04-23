@@ -51,10 +51,10 @@ async fn main() {
                     .lightning_balance
                     .map_or("n/a".into(), |v| v.to_string());
                 let oc = resp
-                    .onchain_balance
+                    .onchain_balance_sats
                     .map_or("n/a".into(), |v| v.to_string());
                 println!(
-                    "{}: total={} lightning={} onchain={} (msat)",
+                    "{}: total={} msat, lightning={} msat, onchain={} sat",
                     label, resp.balance, ln, oc
                 );
             }
